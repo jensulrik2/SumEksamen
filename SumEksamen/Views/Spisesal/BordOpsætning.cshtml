@@ -1,0 +1,286 @@
+@{
+    ViewData["Title"] = "Spisesal";
+}
+
+<h1>Bordopsætning</h1>
+
+@model List<Bord>
+
+<div>
+    <form id="distributeStudentsForm" method="post" action="/Bord/TilfojElevTilBordFraVenteliste">
+        <label for="aargang">Vælg årgang:</label>
+        <select id="aargang" name="aargang" required>
+            @foreach (var aargang in ViewBag.AargangList)
+            {
+                <option value="@aargang">@aargang</option>
+            }
+        </select>
+        <button type="submit" id="distributeButton">Fordel Elever</button>
+    </form>
+</div>
+
+<div id="createForm">
+    <h2>Opret Bord</h2>
+    <form id="createBordForm" method="post" action="/Bord/OpretBord">
+        <label for="bordNr">Bord Nr:</label>
+        <input type="number" id="bordNr" name="bordNr" required><br>
+        <label for="antalPladser">Antal Pladser:</label>
+        <input type="number" id="antalPladser" name="antalPladser" required><br>
+        <button type="submit">Opret</button>
+    </form>
+</div>
+
+<div class="layout" id="layout">
+    @for (var i = 0; i < Model.Count; i++)
+    {
+        var bord = Model[i];
+        <div class="bord-container">
+            <div class="bord" id="bord-@bord.bordNr" onclick="editBord(@bord.bordNr, @bord.antalPladser)">
+                <div class="bord-nummer">Bord @bord.bordNr</div>
+
+                @{
+                    var pladserPerSide = bord.antalPladser / 2;
+                    var extraSeat = bord.antalPladser % 2;
+                    var elevIndex = 0;
+
+                    for (var j = 0; j < pladserPerSide + extraSeat; j++)
+                    {
+                        double venstre = (j + 1) * (100 / (pladserPerSide + extraSeat + 1));
+                        var elev = bord.elever.ElementAtOrDefault(elevIndex++);
+                        var elevStyle = elev != null ? elev.Køn == Køn.pige ? "background-color: pink;" : "background-color: darkblue;" : "";
+                        var elevName = elev != null ? elev.Navn : "";
+                        <div class="plads" style="top: -15px; left: @($"{venstre}%"); @elevStyle" title="@elevName"
+                             draggable="true" ondragstart="drag(event)" id="elev-@elev?.Navn"></div>
+                    }
+
+                    for (var j = 0; j < pladserPerSide; j++)
+                    {
+                        double venstre = (j + 1) * (100 / (pladserPerSide + 1));
+                        var elev = bord.elever.ElementAtOrDefault(elevIndex++);
+                        var elevStyle = elev != null ? elev.Køn == Køn.pige ? "background-color: pink;" : "background-color: darkblue;" : "";
+                        var elevName = elev != null ? elev.Navn : "";
+                        <div class="plads" style="bottom: -15px; left: @($"{venstre}%"); @elevStyle" title="@elevName"
+                             draggable="true" ondragstart="drag(event)" id="elev-@elev?.Navn"></div>
+                    }
+                }
+            </div>
+            <form method="post" action="/Bord/SletBord" style="display:inline;">
+                <input type="hidden" name="bordNr" value="@bord.bordNr">
+                <button type="submit">Slet</button>
+            </form>
+            <div class="elev-liste">
+                <h4>Elever ved bordet:</h4>
+                <ul>
+                    @foreach (var elev in bord.elever)
+                    {
+                        <li>@elev.Navn (@elev.Køn)</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="editForm" style="display:none;">
+    <h2>Edit Bord</h2>
+    <form id="editBordForm" method="post" action="/Bord/UpdateBord">
+        <input type="hidden" id="bordNr" name="bordNr">
+        <label for="antalPladser">Antal Pladser:</label>
+        <input type="number" id="antalPladser" name="antalPladser" required><br>
+        <button type="submit">Save</button>
+        <button type="button" onclick="cancelEdit()">Cancel</button>
+    </form>
+</div>
+
+<button onclick="printBordOpsaetning()">Print Bordopsætning</button>
+
+<style>
+    .layout {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        padding: 20px;
+    }
+
+    .bord-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bord {
+        position: relative;
+        width: 150px;
+        height: 80px;
+        background-color: #4b98af;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        cursor: pointer;
+    }
+
+    .plads {
+        width: 20px;
+        height: 20px;
+        background-color: #9bd1e3;
+        border-radius: 50%;
+        position: absolute;
+    }
+
+    .plads:hover {
+        background-color: #5a6f77;
+        cursor: pointer;
+    }
+
+    .bord-nummer {
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        position: absolute;
+    }
+
+    .bord-container form {
+        margin-top: 20px;
+    }
+
+    .inline-form label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-right: 10px;
+    }
+
+</style>
+
+
+
+<script>
+    function editBord(bordNr, antalPladser) {
+        document.getElementById('editForm').style.display = 'block';
+        document.getElementById('bordNr').value = bordNr;
+        document.getElementById('antalPladser').value = antalPladser;
+    }
+
+    function cancelEdit() {
+        document.getElementById('editForm').style.display = 'none';
+    }
+
+    document.getElementById('createBordForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+
+        fetch('/Bord/OpretBord', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error creating bord:', error));
+    });
+
+    function printBordOpsaetning() {
+        let printContents = document.querySelector('.layout').innerHTML;
+        let originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+
+        window.location.reload();
+    }
+
+    function drag(event) {
+        event.dataTransfer.setData("text", event.target.id);
+    }
+
+    function allowDrop(event) {
+        event.preventDefault();
+    }
+
+    function drop(event) {
+        event.preventDefault();
+        const data = event.dataTransfer.getData("text");
+        const draggedElement = document.getElementById(data);
+        const targetElement = event.target;
+
+        if (targetElement.classList.contains("plads")) {
+            const draggedTable = draggedElement.closest('.bord-container');
+            const targetTable = targetElement.closest('.bord-container');
+
+            const draggedGirls = draggedTable.querySelectorAll('.plads[style*="background-color: pink;"]').length;
+            const targetGirls = targetTable.querySelectorAll('.plads[style*="background-color: pink;"]').length;
+
+            const draggedIsGirl = draggedElement.style.backgroundColor === 'pink';
+            const targetIsGirl = targetElement.style.backgroundColor === 'pink';
+
+            if ((draggedIsGirl && draggedGirls <= 2) || (targetIsGirl && targetGirls <= 2)) {
+                alert("Hvert bord skal mindst have 2 piger");
+                return;
+            }
+
+            const tempId = targetElement.id;
+            targetElement.id = draggedElement.id;
+            draggedElement.id = tempId;
+
+            const tempTitle = targetElement.title;
+            targetElement.title = draggedElement.title;
+            draggedElement.title = tempTitle;
+
+            const tempStyle = targetElement.style.backgroundColor;
+            targetElement.style.backgroundColor = draggedElement.style.backgroundColor;
+            draggedElement.style.backgroundColor = tempStyle;
+
+            updateStudentList(draggedTable);
+            updateStudentList(targetTable);
+        }
+    }
+
+    function updateStudentList(table) {
+        const studentList = table.querySelector('.elev-liste ul');
+        const students = table.querySelectorAll('.plads');
+        studentList.innerHTML = '';
+
+        students.forEach(function (student) {
+            const studentName = student.title;
+            const studentGender = student.style.backgroundColor === 'pink' ? 'pige' : 'dreng';
+            const listItem = document.createElement('li');
+            listItem.textContent = studentName + ' (' + studentGender + ')';
+            studentList.appendChild(listItem);
+        });
+    }
+
+    document.querySelectorAll('.plads').forEach(function (plads) {
+        plads.addEventListener('dragover', allowDrop);
+        plads.addEventListener('drop', drop);
+    });
+
+    document.getElementById('distributeStudentsForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const distributeButton = document.getElementById('distributeButton');
+
+        fetch('/Bord/TilfojElevTilBordFraVenteliste', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    distributeButton.disabled = true;
+                    window.location.reload();
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error adding students to table:', error));
+    });
+</script>
+

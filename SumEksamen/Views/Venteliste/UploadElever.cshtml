@@ -1,0 +1,36 @@
+@model Venteliste
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Excel Fil</title>
+</head>
+<body>
+<h2>Upload Excel Fil</h2>
+<form asp-action="UploadExcel" method="post" enctype="multipart/form-data">
+    <label for="file">Vælg Excel-fil:</label>
+    <input type="file" name="file" id="file" required/>
+    <br>
+
+    <label for="aargang">Vælg venteliste (årgang):</label>
+    <select id="aargang" name="aargang" required>
+        <option value="" disabled selected>Vælg årgang</option>
+
+        @foreach (var venteliste in ViewBag.Ventelister)
+        {
+            <option value="@venteliste.Aargang">@venteliste.Aargang</option>
+        }
+    </select>
+    <br>
+
+    <input type="submit" value="Upload"/>
+</form>
+
+<form method="get" action="@Url.Action("Ventelister", "Venteliste")">
+    <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">Tilbage til Ventelister</button>
+</form>
+
+</body>
+</html>
+
+
+

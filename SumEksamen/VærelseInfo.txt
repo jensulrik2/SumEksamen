@@ -1,0 +1,17 @@
+Pige Værelser
+    2. mands værelser
+       -Antal: 0
+    3. mands værelser
+       -Antal: 0
+    4. mands værelser
+       -Antal: 15
+
+Drenge Værelser
+    2. mands værelser
+        -Antal: 2
+    3. mands værelser
+        -Antal: 0
+    4. mands værelser
+        -Antal: 17
+    5. mands værelser
+        -Antal: 1

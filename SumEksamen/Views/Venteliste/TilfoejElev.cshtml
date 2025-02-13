@@ -1,0 +1,33 @@
+@model Venteliste
+
+<h2>Tilføj Elev</h2>
+
+<form method="post" action="/venteliste/tilfojElev">
+    <label for="navn">Navn:</label>
+    <input type="text" id="navn" name="navn" required/>
+    <br>
+
+    <label for="køn">Køn:</label>
+    <select id="køn" name="køn" required>
+        <option value="dreng">Dreng</option>
+        <option value="pige">Pige</option>
+    </select>
+    <br>
+
+    <label for="aargang">Vælg venteliste (årgang):</label>
+    <select id="aargang" name="aargang" required>
+        <option value="" disabled selected>Vælg årgang</option>
+
+        @foreach (var venteliste in ViewBag.Ventelister)
+        {
+            <option value="@venteliste.Aargang">@venteliste.Aargang</option>
+        }
+    </select>
+    <br>
+
+    <input type="submit" value="Tilføj Elev"/>
+</form>
+
+<form method="get" action="@Url.Action("Ventelister", "Venteliste")">
+    <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">Tilbage til Ventelister</button>
+</form>

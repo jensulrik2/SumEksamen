@@ -1,0 +1,37 @@
+@model Klassehold
+
+@{
+    ViewData["Title"] = "Klassehold Detaljer";
+}
+
+<h1>Detaljer for Klassehold</h1>
+
+<p><strong>Fag:</strong> @Model.Fag</p>
+<p><strong>Lokale:</strong> @Model.Lokale</p>
+
+@if (Model.hentElever() != null && Model.hentElever().Any())
+{
+    <h3>Elever</h3>
+    <ul>
+        @foreach (var elev in Model.hentElever())
+        {
+            <li>@elev</li>
+        }
+    </ul>
+}
+else
+{
+    <p>Der er ingen elever tilknyttet dette klassehold.</p>
+}
+
+<form method="get" action="@Url.Action("Index", "Klassehold")" style="display: inline;">
+    <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Tilbage til forside</button>
+</form>
+
+
+<form method="get" action="@Url.Action("KlasseholdOversigt", "Klassehold")" style="display: inline;">
+    <button type="submit" class="btn btn-secondary" style="margin-right: 10px;">Tilbage til oversigten</button>
+</form>
+
+
+

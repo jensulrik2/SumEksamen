@@ -1,0 +1,29 @@
+@model List<Værelse>
+
+@{
+    ViewData["Title"] = "Fordelte værelser";
+}
+
+<h2>Fordelte værelser</h2>
+
+@if (Model != null && Model.Any())
+{
+    <ul>
+        @foreach (var værelse in Model)
+        {
+            <li>
+                <strong>Værelse med @værelse.HentVærelse().Count elever:</strong>
+                <ul>
+                    @foreach (var elev in værelse.HentVærelse())
+                    {
+                        <li>@elev.Navn (Køn: @elev.Køn)</li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>Ingen elever blev fordelt på værelser.</p>
+}

@@ -1,0 +1,39 @@
+@model IEnumerable<Klassehold>
+
+@{
+    ViewData["Title"] = "Klassehold Oversigt";
+}
+
+<h1>Klassehold Oversigt</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Fag</th>
+            <th>Lokale</th>
+            <th>Handlinger</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var klassehold in Model)
+        {
+            <tr>
+                <td>@klassehold.Fag</td>
+                <td>@klassehold.Lokale</td>
+                <td>
+                    <a asp-action="KlasseholdDetaljer" asp-route-fag="@klassehold.Fag" class="btn btn-primary">Se
+                        Detaljer</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Der er ingen oprettede klassehold endnu.</p>
+}
+<a asp-action="Index" class="btn btn-secondary">Tilbage</a>
+

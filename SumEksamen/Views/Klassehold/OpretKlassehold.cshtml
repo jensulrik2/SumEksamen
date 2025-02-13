@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Opret Klassehold";
+}
+
+<h1>Opret et nyt klassehold</h1>
+
+<form asp-action="OpretKlassehold" method="get">
+    <div class="form-group">
+        <label for="fag">Fag</label>
+        <input type="text" class="form-control small-input" id="fag" name="fag" required/>
+    </div>
+    <div class="form-group">
+        <label for="lokale">Lokale:</label>
+        <input type="text" class="form-control small-input" id="lokale" name="lokale" required/>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Opret Klassehold</button>
+</form>
+<form method="get" action="@Url.Action("Index", "Klassehold")" style="display: inline;">
+    <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">Tilbage til forside</button>
+</form>
+
+<style>
+    .small-input {
+        max-width: 200px;
+    }
+</style>

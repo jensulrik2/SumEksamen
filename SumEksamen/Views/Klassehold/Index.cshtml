@@ -1,0 +1,18 @@
+@{
+    ViewData["Title"] = "Klassehold - Oversigt";
+}
+
+<h1>Velkommen til Klassehold Management</h1>
+<p>Vælg en funktion fra menuen for at administrere klassehold.</p>
+
+<div>
+    <form asp-action="OpretKlassehold" method="get">
+        <button type="submit" class="btn btn-primary">Opret Klassehold</button>
+    </form>
+</div>
+
+<div style="margin-top: 10px;">
+    <form asp-action="KlasseholdOversigt" method="get">
+        <button type="submit" class="btn btn-secondary">Se Klassehold Oversigt</button>
+    </form>
+</div>

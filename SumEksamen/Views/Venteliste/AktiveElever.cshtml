@@ -1,0 +1,20 @@
+@model List<Elev>
+
+
+<h1>Aktive Elever</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Navn</th>
+        <th>Køn</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var elev in Model)
+    {
+        <tr>
+            <td>@elev.Navn</td>
+        </tr>
+    }
+    </tbody>
+</table>

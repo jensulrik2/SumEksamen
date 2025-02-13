@@ -1,0 +1,39 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
+  &lt;Assembly Path="/Users/rasmusjerlov/.nuget/packages/nunit/4.2.2/lib/net6.0/nunit.framework.dll" /&gt;
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestProjectMapping/=F18B4A64_002DC469_002D44B8_002DBC84_002D774B237F868F/@EntryIndexedValue">F18B4A64-C469-44B8-BC84-774B237F868F</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=NUnit3x/@EntryIndexedValue">db4927dd-2e12-48a7-9a84-2b7e3e31b9c8</s:String>
+	<s:Boolean x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/ShowAdvancedOptions/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/UnitTesting/CreateUnitTestDialog/TestTemplateMapping/=xUnit/@EntryIndexedValue">33ff99d8-b1ad-4ed5-a4fd-376b97c2c841</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=48ac058d_002D25d3_002D4694_002Db8ab_002De78170956d1f/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="tilfojElever #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::F18B4A64-C469-44B8-BC84-774B237F868F::net8.0::SumEksamen.Tests.VentelisteTest.tilfojElever&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=5ce53b89_002D176d_002D4df0_002D99bf_002D2b1f46e3497b/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="tilfojElever #3" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+<<<<<<< HEAD
+    &lt;TestId&gt;xUnit::0BFF4CBF-4E57-435E-AB7A-B7C4E11DA3CD::net8.0::SumEksamen.Tests.Models.KøkkenholdTest&lt;/TestId&gt;
+=======
+    &lt;TestId&gt;xUnit::F18B4A64-C469-44B8-BC84-774B237F868F::net8.0::SumEksamen.Tests.VentelisteTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::F18B4A64-C469-44B8-BC84-774B237F868F::net8.0::SumEksamen.Tests.VentelisteControllerTest&lt;/TestId&gt;
+>>>>>>> 15e35dd3c0cb1c6b4fee189a1c4db5c92bd7418f
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6531c5d6_002D66b4_002D4ba4_002D857f_002D9f5c11819f12/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="VentelisteTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::F18B4A64-C469-44B8-BC84-774B237F868F::net8.0::SumEksamen.Tests.VentelisteTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c0bd3f13_002Df709_002D4757_002D86a4_002D1381b0c207e0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="tilfojElever #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::F18B4A64-C469-44B8-BC84-774B237F868F::net8.0::SumEksamen.Tests.VentelisteTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=ca5753e3_002Dd8c7_002D4413_002D96bd_002D080640bd9838/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="tilfojElever" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;xUnit::F18B4A64-C469-44B8-BC84-774B237F868F::net8.0::SumEksamen.Tests.VentelisteTest&lt;/TestId&gt;
+    &lt;TestId&gt;xUnit::F18B4A64-C469-44B8-BC84-774B237F868F::net8.0::SumEksamen.Tests.VentelisteControllerTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

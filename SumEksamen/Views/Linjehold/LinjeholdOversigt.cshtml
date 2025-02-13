@@ -1,0 +1,81 @@
+@model List<Linjehold>
+
+@{
+    ViewData["Title"] = "Linjehold Oversigt";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Type</th>
+        <th>Kapacitet</th>
+        <th>Køn</th>
+        <th>Elever</th>
+        <th>Handlinger</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var linjehold in Model)
+    {
+        <tr>
+            <td>@linjehold.type</td>
+            <td>@linjehold.kapacitet</td>
+            <td>@linjehold.køn</td>
+            <td>
+                @if (linjehold.hentElever().Any())
+                {
+                    <ul>
+                        @foreach (var elev in linjehold.hentElever())
+                        {
+                            <li>@elev.Navn (@elev.Køn)</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <span>Ingen elever tilknyttet</span>
+                }
+            </td>
+            <td>
+                <form asp-action="FordelElevPaaLinjehold" method="get">
+                    <input type="hidden" name="LinjeholdId" value="@linjehold.Id"/>
+                    <select name="elevNavn" required>
+                        <option value="" disabled selected>Vælg elev</option>
+                        @foreach (var elev in ViewData["Elever"] as List<Elev>)
+                        {
+                            <option value="@elev.Navn">@elev.Navn (@elev.Køn)</option>
+                        }
+                    </select>
+                    <button type="submit" class="btn btn-success">Tildel</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+<form method="get" action="@Url.Action("Index", "Linjehold")">
+    <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">Opret linjehold</button>
+</form>
+
+<hr/>
+
+<h5>Opret Elevliste Fra Venteliste</h5>
+
+
+<form method="get" action="@Url.Action("OpretElevlisteFraVenteliste", "Linjehold")">
+    <div class="form-group">
+        <label for="aargang">Vælg årgang</label>
+        <select id="aargang" name="aargang" class="form-control" required>
+            <option value="" disabled selected>Vælg en årgang</option>
+            @foreach (var aargang in ViewBag.AargangList as List<string>)
+            {
+                <option value="@aargang">@aargang</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Opret Elevliste</button>
+</form>

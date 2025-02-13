@@ -1,0 +1,27 @@
+@model List<Linjehold>
+@{
+    ViewData["Title"] = "Opret Elevliste";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<!-- Form til at oprette elevliste fra venteliste -->
+<form method="get" action="@Url.Action("OpretElevlisteFraVenteliste", "Linjehold")">
+    <div class="form-group">
+        <label for="aargang">Vælg årgang</label>
+        <select id="aargang" name="aargang" class="form-control" required>
+            <option value="" disabled selected>Vælg en årgang</option>
+            @foreach (var aargang in ViewBag.AargangList as List<string>)
+            {
+                <option value="@aargang">@aargang</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Opret Elevliste</button>
+</form>
+
+<hr/>
+
+<a href="@Url.Action("LinjeholdOversigt", "Linjehold")" class="btn btn-secondary" style="margin-top: 10px;">Se
+    Oversigt</a>
+

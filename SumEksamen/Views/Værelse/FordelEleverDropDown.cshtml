@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "Fordel elever på værelser";
+}
+
+<h2>Fordel elever på værelser</h2>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
+<form asp-action="FordelEleverFraVenteliste" method="post">
+    <div class="form-group">
+        <label for="valgtAargang">Vælg en venteliste (årgang):</label>
+        <select id="valgtAargang" name="valgtAargang" class="form-control">
+            <option value="">-- Vælg en årgang --</option>
+            @foreach (var aargang in ViewBag.AargangList)
+            {
+                <option value="@aargang">@aargang</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Fordel Elever</button>
+</form>

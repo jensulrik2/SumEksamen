@@ -1,0 +1,47 @@
+@model List<Elev>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Excel</title>
+</head>
+<body>
+<h2>Upload Excel File</h2>
+<form asp-action="UploadExcel" method="post" enctype="multipart/form-data">
+    <input type="file" name="file"/>
+    <button type="submit">Upload</button>
+</form>
+
+<h2>Opret KøkkenHold fra venteliste</h2>
+<form asp-action="OpretKøkkenholdFraVenteliste" method="post">
+    <div class="form-group">
+        <label for="aargang">Vælg Årgang</label>
+        <select id="aargang" name="aargang" class="form-control">
+            @foreach (var aargang in ViewBag.AargangList)
+            {
+                <option value="@aargang">@aargang</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Opret Køkkenhold fra venteliste</button>
+
+</form>
+
+@if (Model != null && Model.Count > 0)
+{
+    <h2>List of Elever</h2>
+    <ul>
+        @foreach (var elev in Model)
+        {
+            <li>@elev.Navn - @elev.Køn</li>
+        }
+    </ul>
+
+
+    <h2>Create Køkkenhold</h2>
+    <form asp-action="CreateKøkkenhold" method="post">
+        <button type="submit">Create Køkkenhold</button>
+    </form>
+}
+</body>
+</html>

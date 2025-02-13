@@ -1,0 +1,91 @@
+@model List<Venteliste>
+
+<h1>Ventelister</h1>
+
+<form method="post" asp-action="FindElev" style="margin-bottom: 20px;">
+    <label for="elevNavn">Søg efter elev:</label>
+    <input type="text" id="elevNavn" name="elevNavn" placeholder="Indtast elevens navn" required/>
+    <button type="submit">Søg</button>
+</form>
+
+@if (ViewBag.Message != null)
+{
+    <p style="color: red;">@ViewBag.Message</p>
+}
+
+@if (ViewBag.ElevNavn != null)
+{
+    <h2>Ventelister for elev: @ViewBag.ElevNavn</h2>
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Årgang</th>
+                <th>Tilføj bemærkning</th>
+                <th>Slet elev</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var venteliste in Model)
+            {
+                <tr>
+                    <td>@venteliste.Aargang</td>
+                    <td>
+                        <form method="post" asp-action="TilfojBemaerkning" style="display: inline;">
+                            <input type="hidden" name="elevNavn" value="@ViewBag.ElevNavn"/>
+                            <input type="text" name="bemærkning" placeholder="Tilføj bemærkning" required/>
+                            <button type="submit" class="btn btn-success btn-sm">Tilføj</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post" asp-action="SletElev" style="display: inline;">
+                            <input type="hidden" name="elevNavn" value="@ViewBag.ElevNavn"/>
+                            <input type="hidden" name="aargang" value="@venteliste.Aargang"/>
+                            <button type="submit" class="btn btn-danger btn-sm">Slet</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Ingen ventelister fundet for denne elev.</p>
+    }
+
+    <form method="get" action="@Url.Action("Ventelister", "Venteliste")">
+        <button type="submit" class="btn btn-secondary" style="margin-top: 10px;">Tilbage til Ventelister</button>
+    </form>
+}
+
+else
+{
+    <h2>Alle Ventelister</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Årgang</th>
+            <th>Handlinger</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var venteliste in Model)
+        {
+            <tr>
+                <td>@venteliste.Aargang</td>
+                <td>
+                    <a href="@Url.Action("VentelisteDetaljer", "Venteliste", new { aargang = venteliste.Aargang })">Se
+                        detaljer</a>
+                </td>
+
+
+            </tr>
+        }
+        </tbody>
+    </table>
+    <form method="get" action="@Url.Action("OpretVenteliste", "Venteliste")">
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Opret ventelise</button>
+    </form>
+}

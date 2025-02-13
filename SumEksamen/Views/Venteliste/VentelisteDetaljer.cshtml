@@ -1,0 +1,56 @@
+@model Venteliste
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detaljer om Venteliste @Model.Aargang</title>
+</head>
+<body>
+
+<h2>Venteliste - Årgang: @Model.Aargang</h2>
+
+<h3>Elever på ventelisten:</h3>
+<ul>
+    @foreach (var elev in Model.hentElever())
+    {
+        <li>
+            @elev.Navn - @elev.Køn - <strong>Bemærkninger:</strong><br/>
+            @if (elev.Bemærkninger.Any())
+            {
+                @foreach (var bemærkning in elev.Bemærkninger)
+                {
+                    <div style="margin-left: 20px;">
+                        @bemærkning.Dato.ToString("yyyy-MM-dd HH:mm:ss"): @bemærkning.Tekst
+                    </div>
+                }
+            }
+            else
+            {
+                <span>Ingen bemærkninger</span>
+            }
+        </li>
+    }
+</ul>
+
+
+<form method="get" action="@Url.Action("TilfoejElev", "Venteliste", new { aargang = Model.Aargang })"
+      style="display: inline;">
+    <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Tilføj elev til denne venteliste</button>
+</form>
+
+<form method="get" action="@Url.Action("UploadElever", "Venteliste", new { aargang = Model.Aargang })"
+      style="display: inline;">
+    <button type="submit" class="btn btn-primary" style="margin-right: 10px;">Upload elever til denne venteliste
+    </button>
+</form>
+
+<form method="get" action="@Url.Action("Ventelister", "Venteliste")" style="display: inline;">
+    <button type="submit" class="btn btn-secondary">Tilbage til Ventelister</button>
+</form>
+
+</body>
+</html>
+
+
+
+

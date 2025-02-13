@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Plads Portalen</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/SumEksamen.styles.css" asp-append-version="true"/>
+    <style>
+        .vertical-nav {
+            width: 200px; /* Adjusted width */
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #ffffff; /* Set background color to white */
+            border-right: 1px solid #000000; /* Add black edge */
+            padding-top: 20px;
+            text-align: center; /* Center text */
+        }
+
+        .vertical-nav .nav-link {
+            text-align: center; /* Center text */
+        }
+
+        .nav-link {
+            display: block; /* Ensure the entire link area is clickable */
+            padding: 10px 15px; /* Adjust padding for better spacing */
+            border-radius: 5px; /* Add slight rounded corners */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+        }
+
+        .nav-link:hover {
+            background-color: #007bff; /* Change background color on hover */
+            color: white !important; /* Change text color on hover */
+            transform: scale(1.05); /* Slightly enlarge the item on hover */
+            text-decoration: none; /* Remove underline on hover */
+        }
+
+        .nav-link:active {
+            transform: scale(0.98); /* Slight press effect when clicked */
+        }
+
+        .main-content {
+            margin-left: 200px; /* Adjusted margin to match the nav width */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="vertical-nav">
+        <title>@ViewData["Title"] - Plads Portalen</title>
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Plads Portalen</a>
+        <ul class="navbar-nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Køkkenhold" asp-action="upload">Køkkenhold</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Venteliste" asp-action="Opretventeliste">Venteliste</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Bord" asp-action="BordOpsætning">Spisesal</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Værelse" asp-action="FordelEleverDropDown">Værelser</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Klassehold" asp-action="Index">Klassehold</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Linjehold" asp-action="LinjeholdOversigt">Linjehold</a>
+            </li>
+        </ul>
+        <div id="MyClockDisplay" class="clock" onload="showTime()"></div>
+    </nav>
+</header>
+<div class="main-content">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="border-top footer text-muted" style="margin-right: 100%; padding-right:  50%;">
+    <div class="container">
+        &copy; 2024 Plads Portalen
+    </div>
+</footer>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", false)
+</body>
+</html>

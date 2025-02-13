@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- New Section: Firkant with 4 Pictures -->
+<div class="Titel">
+    <h1>Plads Portalen</h1>
+</div>
+
+
+<div class="firkant-container">
+    <div class="firkant">
+        <div class="firkant-cell">
+            <img src="~/kitchen.png" class="firkant-image" alt="Image 1">
+        </div>
+        <div class="firkant-cell">
+            <img src="~/waiting-list (1).png" class="firkant-image" alt="Image 2">
+        </div>
+        <div class="firkant-cell">
+            <img src="~/eat.png" class="firkant-image" alt="Image 3">
+        </div>
+        <div class="firkant-cell">
+            <img src="~/bunk-bed.png" class="firkant-image" alt="Image 4">
+        </div>
+    </div>
+</div>
+
+<style>
+    .Titel {
+        text-align: center;
+        color: #0a53be;
+        font: 30px Arial, sans-serif;
+    }
+
+
+    .firkant-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+
+    }
+
+
+    .firkant {
+        width: 300px; /* Size of the firkant */
+        height: 300px;
+        border-radius: 15px; /* Rounded corners for the firkant */
+        overflow: hidden; /* Keeps images within the firkant */
+        display: grid; /* Grid layout for dividing into 4 sections */
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        grid-template-rows: 1fr 1fr; /* Two rows */
+        border: 2px solid #000; /* Optional border for the outer firkant */
+    }
+
+    .firkant-cell {
+        border: 1px solid #000; /* Border between the images */
+    }
+
+    .firkant-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures images fill their sections nicely */
+    }
+</style>

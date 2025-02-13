@@ -1,0 +1,29 @@
+<form id="linjeholdForm" asp-action="OpretLinjehold" method="get">
+    <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" class="form-control small-input" id="type" name="type" required/>
+    </div>
+    <div class="form-group">
+        <label for="kapacitet">Kapacitet</label>
+        <input type="number" class="form-control small-input" id="kapacitet" name="kapacitet" required/>
+    </div>
+    <div class="form-group">
+        <label for="køn">Køn</label>
+        <select class="form-control small-input" id="køn" name="køn" required>
+            <option value="" disabled selected>Vælg køn</option>
+            <option value="dreng">dreng</option>
+            <option value="pige">pige</option>
+            <option value="blandet">blandet</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Opret Linjehold</button>
+</form>
+
+<a href="@Url.Action("LinjeholdOversigt", "Linjehold")" class="btn btn-secondary" style="margin-top: 10px;">Tilbage til
+    oversigt</a>
+
+<style>
+    .small-input {
+        max-width: 300px;
+    }
+</style>

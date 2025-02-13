@@ -1,0 +1,26 @@
+@model List<Køkkenhold>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Køkkenhold</title>
+</head>
+<body>
+<h2>Køkkenhold</h2>
+@foreach (var køkkenhold in Model)
+{
+    <h3>Uge: @køkkenhold.UgeNr</h3>
+    <ul>
+        @foreach (var elev in køkkenhold.GetElevListe())
+        {
+            <li>@elev.Navn - @elev.Køn</li>
+        }
+    </ul>
+}
+
+<form asp-action="ExportToExcel" asp-controller="Køkkenhold" method="post">
+    <button type="submit">Export to Excel</button>
+</form>
+
+</body>
+</html>
